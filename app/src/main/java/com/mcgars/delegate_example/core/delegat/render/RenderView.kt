@@ -6,9 +6,6 @@ import android.view.ViewGroup
 import com.mcgars.basekitk.features.recycler2.KitAdapter
 import com.mcgars.delegate_example.core.delegat.adapter.RenderViewHolder
 
-/**
- * Created by gars on 01.11.17.
- */
 interface RenderView<T> {
 
     /**

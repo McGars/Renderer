@@ -1,5 +1,6 @@
 package com.mcgars.delegate_example.core.delegat.render
 
+import androidx.annotation.LayoutRes
 import com.mcgars.basekitk.features.recycler2.KitAdapter
 import com.mcgars.delegate_example.core.delegat.adapter.RenderViewHolder
 
@@ -10,8 +11,9 @@ import com.mcgars.delegate_example.core.delegat.adapter.RenderViewHolder
  * without call [RenderView.getView]
  */
 class RenderViewContainer<T>(
-        layout: Int,
-        vararg array: RenderView<T>
+    @LayoutRes
+    layout: Int,
+    vararg array: RenderView<T>
 ) : RenderViewInflate<T>(layout) {
 
     val renders = mutableListOf<RenderView<T>>()
