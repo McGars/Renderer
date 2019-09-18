@@ -7,9 +7,6 @@ import com.mcgars.basekitk.features.recycler2.AbsListItemAdapterDelegate
 import com.mcgars.basekitk.features.recycler2.KitAdapter
 import com.mcgars.delegate_example.core.delegat.render.RenderView
 
-/**
- * Adapter для отображения одного аниме в строке
- */
 open class Renderer<T : Any> : AbsListItemAdapterDelegate<T, Any, RecyclerView.ViewHolder> {
 
     private val render: RenderView<T>
