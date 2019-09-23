@@ -24,7 +24,7 @@ class RenderLooperContainer<T>(
      * Create view
      */
     override fun getView(previousView: View?, parent: ViewGroup, inflater: LayoutInflater): View {
-        var view: View? = null
+        var view: View? = previousView
 
         renders.forEach {
             view = it.getView(view, parent, inflater)

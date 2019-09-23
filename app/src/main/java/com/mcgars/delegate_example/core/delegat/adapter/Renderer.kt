@@ -23,16 +23,6 @@ open class Renderer<T : Any> : AbsListItemAdapterDelegate<T, Any, RecyclerView.V
         this.condition = condition
     }
 
-    @Deprecated("")
-    constructor(render: RenderView<T>, checkItem: (Any) -> Boolean) {
-        this.render = render
-        this.condition = object : RenderCondition {
-            override fun isForViewType(item: Any): Boolean {
-                return checkItem(item)
-            }
-        }
-    }
-
     companion object {
         inline fun <reified T : Any> create(render: RenderView<T>): Renderer<T> {
             return Renderer(render, T::class.java)
@@ -43,7 +33,7 @@ open class Renderer<T : Any> : AbsListItemAdapterDelegate<T, Any, RecyclerView.V
         }
     }
 
-    override fun isForViewType(item: Any, items: List<Any>, position: Int) = condition?.isForViewType(item)
+    override fun isForViewType(item: Any, items: List<Any>, position: Int) = condition?.invoke(item)
             ?: clazz?.isAssignableFrom(item.javaClass) ?: false
 
     /*
@@ -72,3 +62,5 @@ open class Renderer<T : Any> : AbsListItemAdapterDelegate<T, Any, RecyclerView.V
 inline fun <reified T : Any> RenderView<T>.asRenderer(): Renderer<T> {
     return Renderer(this, T::class.java)
 }
+
+typealias RenderCondition = (item: Any) -> Boolean
