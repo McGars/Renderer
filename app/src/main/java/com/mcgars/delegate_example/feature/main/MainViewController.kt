@@ -2,6 +2,9 @@ package com.mcgars.delegate_example.feature.main
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.mcgars.basekitk.animatorHandlers.CircularRevealChangeHandler.Companion.RIGHT_CENTER
+import com.mcgars.basekitk.animatorHandlers.CircularRevealChangeHandlerCompat
+import com.mcgars.basekitk.features.base.BaseViewController
 import com.mcgars.basekitk.features.recycler2.BaseRecycleViewDelegateController
 import com.mcgars.delegate_example.feature.example_1.PageSimpleAdapterViewController
 import com.mcgars.delegate_example.feature.example_2_render.PageRendererViewController
@@ -43,8 +46,8 @@ class MainViewController : BaseRecycleViewDelegateController() {
 
     private fun onItemSelected(item: Text) {
         val page = when(item.name) {
-            DELEGATE_TITLE -> PageSimpleAdapterViewController()
-            RENDER_TITLE -> PageRendererViewController()
+            DELEGATE_TITLE -> PageSimpleAdapterViewController().animate()
+            RENDER_TITLE -> PageRendererViewController().animate()
             else -> throw RuntimeException("$item not supported")
         }
 
@@ -53,6 +56,16 @@ class MainViewController : BaseRecycleViewDelegateController() {
 
     override fun loadData(page: Int) {
 
+    }
+
+    private fun BaseViewController.animate(): BaseViewController {
+        overridePushHandler(CircularRevealChangeHandlerCompat().apply {
+            halfPosition = RIGHT_CENTER
+        })
+        overridePopHandler(CircularRevealChangeHandlerCompat().apply {
+            halfPosition = RIGHT_CENTER
+        })
+        return this
     }
 
 }
